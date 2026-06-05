@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Recipes from "./pages/Recipes";
+import Detail from "./pages/Detail";
+import MyRecipes from "./pages/MyRecipes";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminRecipes from "./pages/AdminRecipes";
+import AdminAddRecipe from "./pages/AdminAddRecipe";
+import AdminCategory from "./pages/AdminCategory";
+import AdminUser from "./pages/AdminUser";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/recipes/:id" element={<Detail />} />
+        <Route path="/my-recipes" element={<MyRecipes />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/recipes" element={<AdminRecipes />} />
+        <Route path="/admin/recipes/add" element={<AdminAddRecipe />} />
+        <Route path="/admin/recipes/edit/:id" element={<AdminAddRecipe />} />
+        <Route path="/admin/category" element={<AdminCategory />} />
+        <Route path="/admin/user" element={<AdminUser />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

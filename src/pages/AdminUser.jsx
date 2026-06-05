@@ -1,0 +1,81 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import SidebarAdmin from "../components/SidebarAdmin";
+
+function AdminUser() {
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  const adminToken = localStorage.getItem("adminToken");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/users", {
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+        },
+      })
+      .then((response) => setUsers(response.data))
+      .catch((err) => {
+        console.log(err);
+        setUsers([]);
+      });
+  }, [adminToken]);
+
+  return (
+    <div className="admin-wrapper">
+      <div className={`sidebar-overlay ${showSidebar ? "show" : ""}`}>
+        <SidebarAdmin close={() => setShowSidebar(false)} />
+      </div>
+
+      <div className="admin-main">
+        <button
+          className="toggle-btn"
+          onClick={() => setShowSidebar(!showSidebar)}
+        >
+          ☰
+        </button>
+
+        <div className="dashboard-box">
+          <h2>Kelola User</h2>
+
+          <table className="recipe-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Tanggal Daftar</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {users.length > 0 ? (
+                users.map((item, index) => (
+                  <tr key={item._id}>
+                    <td>{index + 1}.</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>
+                      {item.createdAt
+                        ? new Date(item.createdAt).toLocaleDateString("id-ID")
+                        : "-"}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    Belum ada user terdaftar
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AdminUser;
