@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# RecipeHub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Website pencarian resep berbasis React.js, Express.js, dan MongoDB.
 
-## Available Scripts
+## Fitur
+- Login JWT
+- Dashboard Admin
+- CRUD Resep
+- Upload Gambar
+- Search Resep
+- Performance Testing (k6)
+- Security Testing
 
-In the project directory, you can run:
+## Cara Menjalankan
 
-### `npm start`
+Frontend:
+npm install
+npm start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Backend:
+cd backend
+npm install
+node server.js
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# RecipeHub - Regression Test Suite
 
-### `npm test`
+## Deskripsi
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+RecipeHub adalah aplikasi web berbasis React.js, Express.js, dan MongoDB yang menyediakan fitur manajemen resep makanan. Pada tugas ini dilakukan implementasi Regression Test Suite menggunakan Jest dan Supertest untuk memastikan endpoint REST API tetap berfungsi setelah adanya perubahan kode.
 
-### `npm run build`
+## Teknologi
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* React.js
+* Express.js
+* MongoDB
+* JWT Authentication
+* Axios
+* Jest
+* Supertest
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Cara Menjalankan Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Masuk ke folder backend:
 
-### `npm run eject`
+```bash
+cd backend
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Install dependency:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Jalankan server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+node server.js
+```
 
-## Learn More
+atau
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npx nodemon server.js
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Cara Menjalankan Regression Test
 
-### Code Splitting
+Masuk ke folder backend:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+cd backend
+```
 
-### Analyzing the Bundle Size
+Jalankan test:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm test
+```
 
-### Making a Progressive Web App
+## Endpoint yang Diuji
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* GET /recipes
+* GET /recipes/:id
+* POST /recipes
+* PUT /recipes/:id
+* DELETE /recipes/:id
 
-### Advanced Configuration
+## Hasil Pengujian
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Seluruh endpoint berhasil diuji menggunakan Jest dan Supertest dengan hasil:
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* 5 Test Passed
+* 1 Test Suite Passed
