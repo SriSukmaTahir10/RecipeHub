@@ -92,3 +92,12 @@ Seluruh endpoint berhasil diuji menggunakan Jest dan Supertest dengan hasil:
 
 * 5 Test Passed
 * 1 Test Suite Passed
+
+# Regression Test Suite
+
+## Menjalankan Test
+
+```bash
+cd backend
+npm install
+npm test
