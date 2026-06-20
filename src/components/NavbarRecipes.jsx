@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import search from "../assets/images/search.png";
 
-function NavbarRecipes({ searchTerm = "", onSearchChange = () => {} }) {
+function NavbarRecipes({
+  searchTerm = "",
+  onSearchChange = () => {},
+  selectedCategory = "",
+  onCategoryChange = () => {},
+}) {
   const navigate = useNavigate();
 
   return (
@@ -21,7 +26,37 @@ function NavbarRecipes({ searchTerm = "", onSearchChange = () => {} }) {
         <img src={search} alt="search" />
       </div>
 
-      <button className="filter-btn">⚙️ Filter</button>
+      <select
+  className="filter-btn"
+  value={selectedCategory}
+  onChange={(e) =>
+    onCategoryChange(e.target.value)
+  }
+>
+  <option value="">
+    Semua Kategori
+  </option>
+
+  <option value="Makanan Berat">
+    Makanan Berat
+  </option>
+
+  <option value="Sayuran">
+    Sayuran
+  </option>
+
+  <option value="Aneka Kue">
+    Aneka Kue
+  </option>
+
+  <option value="Minuman">
+    Minuman
+  </option>
+
+  <option value="Cemilan">
+    Cemilan
+  </option>
+</select>
     </div>
   );
 }

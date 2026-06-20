@@ -8,26 +8,52 @@ function Recipes() {
 
   const [recipes, setRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/recipes")
+      .get("/recipes")
       .then((response) => setRecipes(response.data))
       .catch((err) => console.log(err));
   }, []);
 
   // filter resep berdasarkan judul / kategori
-  const filteredRecipes = recipes.filter((item) => {
-    const title = item.title?.toLowerCase() || "";
-    const category = item.category?.toLowerCase() || "";
-    const search = searchTerm.toLowerCase();
+  const filteredRecipes =
+recipes.filter((recipe) => {
 
-    return title.includes(search) || category.includes(search);
-  });
+  const matchSearch =
+    recipe.title
+      .toLowerCase()
+      .includes(
+        searchTerm.toLowerCase()
+      );
+
+  const matchCategory =
+    selectedCategory === ""
+      ? true
+      : recipe.category ===
+        selectedCategory;
+
+  return (
+    matchSearch &&
+    matchCategory
+  );
+}); 
 
   return (
     <div className="container">
-      <NavbarRecipes searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <NavbarRecipes
+  searchTerm={searchTerm}
+  onSearchChange={setSearchTerm}
+
+  selectedCategory={
+    selectedCategory
+  }
+
+  onCategoryChange={
+    setSelectedCategory
+  }
+/>
 
       <div className="recipes-header">
         <h2>Semua Resep</h2>
@@ -43,7 +69,7 @@ function Recipes() {
               style={{ cursor: "pointer" }}
             >
               <img
-                      src={`http://localhost:5000/uploads/${item.image}`}
+                      src={`/uploads/${item.image}`}
                       alt={item.title}
                     />
 

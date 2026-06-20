@@ -11,6 +11,7 @@ function AdminAddRecipe() {
     category: "",
     time: "",
     difficulty: "",
+    recommendationType: "normal",
     image: null,
     ingredientsText: "",
     stepsText: "",
@@ -21,7 +22,7 @@ function AdminAddRecipe() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:5000/recipes/${id}`)
+        .get(`/recipes/${id}`)
         .then((response) => {
           const data = response.data;
 
@@ -30,6 +31,8 @@ function AdminAddRecipe() {
             category: data.category || "",
             time: data.time || "",
             difficulty: data.difficulty || "",
+            recommendationType:
+              data.recommendationType || "normal",
             image: null,
             ingredientsText: (data.ingredients || []).join("\n"),
             stepsText: (data.steps || []).join("\n"),
@@ -56,6 +59,10 @@ function AdminAddRecipe() {
       formData.append("category", form.category);
       formData.append("time", form.time);
       formData.append("difficulty", form.difficulty);
+      formData.append(
+        "recommendationType",
+        form.recommendationType
+      );
 
       if (form.image) {
         formData.append("image", form.image);
@@ -83,7 +90,7 @@ function AdminAddRecipe() {
 
       if (id) {
         await axios.put(
-          `http://localhost:5000/recipes/${id}`,
+          `/recipes/${id}`,
           formData,
           {
             headers: {
@@ -95,7 +102,7 @@ function AdminAddRecipe() {
         alert("Resep berhasil diperbarui!");
       } else {
         await axios.post(
-          "http://localhost:5000/recipes",
+          "/recipes",
           formData,
           {
             headers: {
@@ -166,6 +173,18 @@ function AdminAddRecipe() {
               <option value="Mudah">Mudah</option>
               <option value="Sedang">Sedang</option>
               <option value="Sulit">Sulit</option>
+            </select>
+
+            <label>Tipe Rekomendasi</label>
+            <select
+              name="recommendationType"
+              onChange={handleChange}
+              value={form.recommendationType}
+            >
+              <option value="normal">Normal</option>
+              <option value="diet">Diet</option>
+              <option value="protein">Protein Tinggi</option>
+              <option value="vegetarian">Vegetarian</option>
             </select>
           </div>
 

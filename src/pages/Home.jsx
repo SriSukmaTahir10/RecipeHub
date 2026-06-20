@@ -15,6 +15,26 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const user =
+JSON.parse(localStorage.getItem("user"));
+
+const recommendedRecipes =
+  recipes.filter(
+    (recipe) =>
+      recipe.recommendationType?.toLowerCase() ===
+      user?.foodPreference?.toLowerCase()
+  )
+  .slice(0, 3);
+
+console.log("USER:");
+console.log(user);
+
+console.log("RECIPES:");
+console.log(recipes);
+
+console.log("RECOMMENDED:");
+console.log(recommendedRecipes);
+
   // ambil resep dari backend
   useEffect(() => {
     const loadRecipes = async () => {
@@ -76,10 +96,10 @@ function Home() {
               <h1>
                 Temukan Resep
                 <br />
-                Lezat Setiap Hari
+                Sesuai Selera Anda
               </h1>
               <p>
-                Kumpulan resep lengkap dengan langkah mudah dan bahan sederhana
+                Cari dan dapatkan rekomendasi resep berdasarkan umur serta preferensi makanan Anda.
               </p>
 
               <button onClick={() => navigate("/recipes")}>Jelajahi Resep</button>
@@ -90,6 +110,30 @@ function Home() {
             </div>
           </div>
 
+          <div className="recipes-section">
+            <h3>Rekomendasi Untuk Anda ⭐</h3>
+          <div className="recipes-grid">
+            {recommendedRecipes.map((item) => (
+          <div
+              key={item._id}
+              className="recipe-card"
+              onClick={() =>
+              navigate(`/recipes/${item._id}`)
+          }
+          >
+        <img
+            src={`http://localhost:5000/uploads/${item.image}`}
+            alt={item.title}
+        />
+
+        <h4>{item.title}</h4>
+        <p>{item.time} • ⭐ {item.rating}</p>
+      </div>
+        ))}
+      </div>
+
+      </div>
+          
           <div className="recipes-section">
             <h3>Resep Terbaru</h3>
 
@@ -113,7 +157,7 @@ function Home() {
                   </div>
                 ))
               ) : (
-                <p style={{ padding: "20px" }}>Belum ada resep.</p>
+                <p style={{ padding: "20px" }}>Belum ada rekomendasi.</p>
               )}
             </div>
           </div>

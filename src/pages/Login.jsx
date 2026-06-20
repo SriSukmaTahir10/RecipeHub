@@ -13,6 +13,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [foodPreference, setFoodPreference] = useState("normal");
 
   // submit register/login ke backend
   const handleAuth = async () => {
@@ -49,6 +51,8 @@ function Login() {
           name,
           email,
           password,
+          age,
+          foodPreference,
         });
 
         const data = response.data;
@@ -143,6 +147,42 @@ function Login() {
             />
           </div>
         )}
+
+        <div className="input-group">
+  <label>Umur</label>
+  <input
+    type="number"
+    value={age}
+    onChange={(e) => setAge(e.target.value)}
+  />
+</div>
+
+<div className="input-group">
+  <label>Preferensi Makanan</label>
+
+  <select
+    value={foodPreference}
+    onChange={(e) =>
+      setFoodPreference(e.target.value)
+    }
+  >
+    <option value="normal">
+      Normal
+    </option>
+
+    <option value="diet">
+      Diet
+    </option>
+
+    <option value="protein">
+      Protein Tinggi
+    </option>
+
+    <option value="vegetarian">
+      Vegetarian
+    </option>
+  </select>
+</div>
 
         {isLogin && (
           <div className="auth-options">

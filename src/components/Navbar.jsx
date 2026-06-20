@@ -16,10 +16,14 @@ function Navbar() {
         </span>
       </div>
 
-      <div className="profile">
-        <img src={profileIcon} alt="profile" />
+      <div
+          className="profile"
+          onClick={() => navigate("/profile")}
+          style={{ cursor: "pointer" }}
+      >
+      <img src={profileIcon} alt="profile" />
       </div>
-    </div>
+      </div>
   );
 }
 

@@ -7,6 +7,34 @@ function AdminUser() {
   const [users, setUsers] = useState([]);
 
   const adminToken = localStorage.getItem("adminToken");
+  const handleDelete = async (id) => {
+  const confirmDelete = window.confirm(
+    "Yakin ingin menghapus user ini?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await axios.delete(
+      `http://localhost:5000/users/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+        },
+      }
+    );
+
+    setUsers(
+      users.filter((user) => user._id !== id)
+    );
+
+    alert("User berhasil dihapus");
+  } catch (error) {
+    console.error(error);
+
+    alert("Gagal menghapus user");
+  }
+};
 
   useEffect(() => {
     axios
@@ -46,6 +74,7 @@ function AdminUser() {
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Tanggal Daftar</th>
+                <th>Aksi</th>
               </tr>
             </thead>
 
@@ -61,11 +90,19 @@ function AdminUser() {
                         ? new Date(item.createdAt).toLocaleDateString("id-ID")
                         : "-"}
                     </td>
+                    <td>
+                      <button
+                          className="delete-btn"
+                          onClick={() => handleDelete(item._id)}
+                      >
+                        Hapus
+                      </button>
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" style={{ textAlign: "center" }}>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
                     Belum ada user terdaftar
                   </td>
                 </tr>

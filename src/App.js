@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import Recipes from "./pages/Recipes";
 import Detail from "./pages/Detail";
 import MyRecipes from "./pages/MyRecipes";
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/recipes/:id" element={<Detail />} />
         <Route path="/my-recipes" element={<MyRecipes />} />

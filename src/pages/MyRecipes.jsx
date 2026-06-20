@@ -11,10 +11,13 @@ function MyRecipes() {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
 
+    console.log("USER LOGIN:", savedUser);
+    console.log("TOKEN:", token);
+    
     if (!savedUser || !token) return;
 
     axios
-      .get(`http://localhost:5000/favorites/${savedUser.id}`, {
+      .get(`http://localhost:5000/favorites/${savedUser._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
