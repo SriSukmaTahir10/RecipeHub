@@ -1,2 +1,2 @@
 export const API_URL =
-  process.env.REACT_APP_API_URL || "";
+  "https://recipehub-production-a589.up.railway.app";
