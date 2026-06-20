@@ -187,14 +187,17 @@ const authLimiter = rateLimit({
 });
 
 // DATABASE
-mongoose
-  .connect("mongodb://127.0.0.1:27017/recipehub")
-  .then(() => console.log("MongoDB Connected"))
+mongoose  
+  .connect("mongodb+srv://srisukmatahirrr_db_user:RecipeHub123@cluster0.67uxgyf.mongodb.net/recipehub?retryWrites=true&w=majority&appName=Cluster0")
+  .then(() => {
+    console.log("MongoDB Atlas Connected");
+    console.log("DB NAME:", mongoose.connection.name);
+  })
   .catch((err) => console.log(err));
 
 // TEST ROUTE
 app.get("/", (req, res) => {
-  res.send("API RecipeHub berjalan");
+  res.send("API RecipeHub TEST 2026");
 });
 
 // AUTH ADMIN
@@ -221,7 +224,13 @@ app.post(
 
   async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const {
+              name,
+              email,
+              password,
+              age,
+              foodPreference
+            } = req.body;
 
       const existingAdmin = await Admin.findOne({ email });
 
@@ -331,6 +340,67 @@ app.post(
 );
 
 // AUTH USER
+
+// PROFILE USER
+
+app.get(
+  "/profile",
+  verifyToken,
+
+  async (req, res) => {
+    try {
+
+      const user = await User.findById(
+        req.user.id
+      ).select("-password");
+
+      if (!user) {
+        return res.status(404).json({
+          message: "User tidak ditemukan",
+        });
+      }
+
+      res.json(user);
+
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
+  }
+);
+
+app.put(
+  "/profile",
+  verifyToken,
+
+  async (req, res) => {
+    try {
+
+      const updatedUser =
+        await User.findByIdAndUpdate(
+          req.user.id,
+          {
+            name: req.body.name,
+            age: req.body.age,
+            foodPreference:
+              req.body.foodPreference,
+          },
+          {
+            new: true,
+          }
+        );
+
+      res.json(updatedUser);
+
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
+  }
+);
+
 // register user
 app.post(
   "/auth/register",
@@ -355,7 +425,13 @@ app.post(
 
   async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const {
+              name,
+              email,
+              password,
+              age,
+              foodPreference
+            } = req.body;
 
       const existingUser = await User.findOne({ email });
 
@@ -368,12 +444,17 @@ app.post(
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const newUser = new User({
-        name,
-        email,
-        password: hashedPassword,
+          name,
+          email,
+          password: hashedPassword,
+          age,
+          foodPreference,
       });
 
       const savedUser = await newUser.save();
+
+      console.log("USER TERSIMPAN:");
+      console.log(savedUser);
 
       res.status(201).json({
         message: "Register berhasil",
@@ -454,6 +535,8 @@ app.post(
           id: user._id,
           name: user.name,
           email: user.email,
+          age: user.age,
+          foodPreference: user.foodPreference,
         },
       });
     } catch (error) {
@@ -476,6 +559,35 @@ app.get(
       const users = await User.find().select("-password");
 
       res.json(users);
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
+  }
+);
+
+// hapus user
+app.delete(
+  "/users/:id",
+  verifyToken,
+  requireRole("admin"),
+
+  async (req, res) => {
+    try {
+      const deletedUser = await User.findByIdAndDelete(
+        req.params.id
+      );
+
+      if (!deletedUser) {
+        return res.status(404).json({
+          message: "User tidak ditemukan",
+        });
+      }
+
+      res.json({
+        message: "User berhasil dihapus",
+      });
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -534,6 +646,7 @@ app.post(
         category: req.body.category,
         time: req.body.time,
         difficulty: req.body.difficulty,
+        recommendationType: req.body.recommendationType,
 
         image: req.file
           ? req.file.filename
@@ -577,6 +690,7 @@ async (req, res) => {
       category: req.body.category,
       time: req.body.time,
       difficulty: req.body.difficulty,
+      recommendationType: req.body.recommendationType,
       ingredients: JSON.parse(
         req.body.ingredients
       ),
@@ -788,6 +902,15 @@ app.delete(
     }
   }
 );
+
+app.get("/dbtest", async (req, res) => {
+  const recipes = await Recipe.find();
+
+  res.json({
+    total: recipes.length,
+    titles: recipes.map((r) => r.title),
+  });
+});
 
 // RUN SERVER
 const PORT = process.env.PORT || 5000;
