@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // backend server utama RecipeHub
 const express = require("express");
 const cors = require("cors");
@@ -41,7 +43,10 @@ const upload = multer({
 });
 
 // secret token
-const JWT_SECRET = "recipehub_secret_key";
+require("dotenv").config();
+
+const JWT_SECRET =
+  process.env.JWT_SECRET;
 
 // MIDDLEWARE
 app.use(cors());
@@ -187,11 +192,14 @@ const authLimiter = rateLimit({
 });
 
 // DATABASE
-mongoose  
-  .connect("mongodb+srv://srisukmatahirrr_db_user:RecipeHub123@cluster0.67uxgyf.mongodb.net/recipehub?retryWrites=true&w=majority&appName=Cluster0")
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("MongoDB Atlas Connected");
-    console.log("DB NAME:", mongoose.connection.name);
+    console.log(
+      "DB NAME:",
+      mongoose.connection.name
+    );
   })
   .catch((err) => console.log(err));
 
