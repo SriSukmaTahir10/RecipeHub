@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
@@ -12,14 +12,10 @@ function Profile() {
 
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    loadProfile();
-  }, []);
-
-  const loadProfile = async () => {
+  const loadProfile = useCallback(async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/profile",
+        "/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -31,12 +27,16 @@ function Profile() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
 
   const handleSave = async () => {
     try {
       await axios.put(
-        "http://localhost:5000/profile",
+        "/profile",
         user,
         {
           headers: {
