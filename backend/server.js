@@ -383,7 +383,7 @@ app.get(
 );
 
 app.put(
-  `${API_URL}/profile`,
+  "profile",
   verifyToken,
 
   async (req, res) => {
@@ -688,7 +688,7 @@ app.post(
 
 // update resep
 app.put(
-  `${API_URL}/recipes/:id`,
+  "/recipes/:id",
 
   verifyToken,
   requireRole("admin"),
