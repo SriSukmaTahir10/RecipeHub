@@ -66,6 +66,7 @@ function Profile() {
     <div>
       <Navbar />
 
+      <div className="profile-container">
       <div className="profile-box">
         <h2>Profil Saya</h2>
 
@@ -111,18 +112,25 @@ function Profile() {
           <option value="normal">Normal</option>
           <option value="diet">Diet</option>
           <option value="protein">Protein</option>
-          <option value="vegetarian">
-            Vegetarian
-          </option>
+          <option value="vegetarian">Vegetarian</option>
         </select>
 
-        <button onClick={handleSave}>
-          Simpan Perubahan
-        </button>
+        <div className="profile-actions">
+          <button
+            className="save-profile-btn"
+            onClick={handleSave}
+            >
+              Simpan Perubahan
+          </button>
 
-        <button onClick={logout}>
-          Logout
-        </button>
+          <button
+            className="logout-profile-btn"
+            onClick={logout}
+            >
+              Logout
+          </button>
+        </div>
+      </div>
       </div>
     </div>
   );

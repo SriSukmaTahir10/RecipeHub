@@ -383,7 +383,7 @@ app.get(
 );
 
 app.put(
-  "profile",
+  "/profile",
   verifyToken,
 
   async (req, res) => {

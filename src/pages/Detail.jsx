@@ -71,12 +71,8 @@ function Detail() {
       <div className="detail-container">
         <div className="detail-left">
           <img
-            src={
-            recipe.image?.startsWith("/images")
-            ? recipe.image
-            : `{recipe.image}`
-            }
-              alt={recipe.title}
+            src={recipe.image}
+            alt={recipe.title}
           />
         </div>
 
