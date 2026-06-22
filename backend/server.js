@@ -713,7 +713,7 @@ async (req, res) => {
 
     if (req.file) {
       updateData.image =
-        req.file.filename;
+        req.file.path;
     }
 
     const updatedRecipe =
