@@ -70,7 +70,7 @@ recipes.filter((recipe) => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`${API_URL}/uploads/${item.image}`}
+                src={item.image}
                 alt={item.title}
               />
 

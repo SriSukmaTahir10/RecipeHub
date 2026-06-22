@@ -74,7 +74,7 @@ function Detail() {
             src={
             recipe.image?.startsWith("/images")
             ? recipe.image
-            : `${API_URL}/uploads/${recipe.image}`
+            : `{recipe.image}`
             }
               alt={recipe.title}
           />

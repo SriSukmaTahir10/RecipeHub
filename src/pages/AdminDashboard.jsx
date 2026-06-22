@@ -110,7 +110,7 @@ function AdminDashboard() {
                   <div key={item._id} className="latest-card">
                     <div className="latest-thumb">
                       <img
-                        src={`${API_URL}/uploads/${item.image}`}
+                        src={item.image}
                         alt={item.title}
                       />
                     </div>

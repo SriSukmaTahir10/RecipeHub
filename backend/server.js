@@ -20,21 +20,25 @@ const Favorite = require("./models/Favorite");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const cloudinary = require("./config/cloudinary");
 const path = require("path");
 
 const app = express();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
+const {
+  CloudinaryStorage,
+} = require("multer-storage-cloudinary");
 
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      Date.now() +
-      path.extname(file.originalname)
-    );
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "recipehub",
+    allowed_formats: [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp",
+    ],
   },
 });
 
@@ -657,7 +661,7 @@ app.post(
         recommendationType: req.body.recommendationType,
 
         image: req.file
-          ? req.file.filename
+          ? req.file.path
           : "",
 
         ingredients: JSON.parse(

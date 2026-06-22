@@ -123,7 +123,7 @@ console.log(recommendedRecipes);
           }
           >
         <img
-            src={`${API_URL}/uploads/${item.image}`}
+            src={item.image}
             alt={item.title}
         />
 
@@ -148,7 +148,7 @@ console.log(recommendedRecipes);
                     style={{ cursor: "pointer" }}
                   >
                   <img
-                      src={`${API_URL}/uploads/${item.image}`}
+                      src={item.image}
                       alt={item.title}
                     />
                     <h4>{item.title}</h4>
@@ -176,7 +176,7 @@ console.log(recommendedRecipes);
                     style={{ cursor: "pointer" }}
                   >
                     <img
-                      src={`${API_URL}/uploads/${item.image}`}
+                      src={item.image}
                       alt={item.title}
                     />
                     <h4>{item.title}</h4>

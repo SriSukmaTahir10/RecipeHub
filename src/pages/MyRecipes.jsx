@@ -47,7 +47,7 @@ function MyRecipes() {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`${API_URL}/uploads/${item.recipeData.image}`}
+                src={item.recipeData.image}
                 alt={item.recipeData.title}
               />
 
