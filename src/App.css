@@ -789,6 +789,19 @@
   cursor: pointer;
 }
 
+.edit-btn {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: rgb(234, 155, 8);
+}
+
 .delete-btn {
   background: #e53935;
   color: white;
