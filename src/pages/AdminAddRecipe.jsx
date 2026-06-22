@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function AdminAddRecipe() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function AdminAddRecipe() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`/recipes/${id}`)
+        .get(`${API_URL}/recipes/${id}`)
         .then((response) => {
           const data = response.data;
 
@@ -90,7 +91,7 @@ function AdminAddRecipe() {
 
       if (id) {
         await axios.put(
-          `/recipes/${id}`,
+          `${API_URL}/recipes/${id}`,
           formData,
           {
             headers: {
@@ -102,7 +103,7 @@ function AdminAddRecipe() {
         alert("Resep berhasil diperbarui!");
       } else {
         await axios.post(
-          "/recipes",
+          `${API_URL}/recipes`,
           formData,
           {
             headers: {
