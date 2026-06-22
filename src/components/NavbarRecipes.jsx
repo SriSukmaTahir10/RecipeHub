@@ -23,7 +23,6 @@ function NavbarRecipes({
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
         />
-        <img src={search} alt="search" />
       </div>
 
       <select

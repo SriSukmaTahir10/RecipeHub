@@ -83,7 +83,6 @@ console.log(recommendedRecipes);
       >
         <img src={search} alt="search" />
         <input placeholder="Cari resep, bahan, atau kategori....." readOnly />
-        <img src={search} alt="search" />
       </div>
 
       {loading && <p style={{ padding: "20px" }}>Memuat resep...</p>}
