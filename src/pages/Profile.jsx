@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { API_URL } from "../config";
 
 function Profile() {
   const [user, setUser] = useState({
@@ -15,7 +16,7 @@ function Profile() {
   const loadProfile = useCallback(async () => {
     try {
       const res = await axios.get(
-        "/profile",
+        `${API_URL}/profile`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,7 +37,7 @@ function Profile() {
   const handleSave = async () => {
     try {
       await axios.put(
-        "/profile",
+        `${API_URL}/profile`,
         user,
         {
           headers: {
