@@ -1,5 +1,6 @@
 import http from "k6/http";
 import { sleep } from "k6";
+import { API_URL } from "../config";
 
 export const options = {
   scenarios: {
@@ -12,6 +13,6 @@ export const options = {
 };
 
 export default function () {
-  http.get("http://localhost:5000/recipes");
+  http.get(`${API_URL}/recipes`);
   sleep(1);
 }

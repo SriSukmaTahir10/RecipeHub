@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SidebarAdmin from "../components/SidebarAdmin";
 import "../App.css";
+import { API_URL } from "../config";
 
 function AdminDashboard() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -15,9 +16,9 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const recipesRequest = axios.get("http://localhost:5000/recipes");
+        const recipesRequest = axios.get(`${API_URL}/recipes`);
 
-        const usersRequest = axios.get("http://localhost:5000/users", {
+        const usersRequest = axios.get(`${API_URL}/users`, {
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -109,7 +110,7 @@ function AdminDashboard() {
                   <div key={item._id} className="latest-card">
                     <div className="latest-thumb">
                       <img
-                        src={`http://localhost:5000/uploads/${item.image}`}
+                        src={`${API_URL}/uploads/${item.image}`}
                         alt={item.title}
                       />
                     </div>

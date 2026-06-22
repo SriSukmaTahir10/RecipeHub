@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NavbarRecipes from "../components/NavbarRecipes";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function Recipes() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function Recipes() {
 
   useEffect(() => {
     axios
-      .get("/recipes")
+      .get(`${API_URL}/recipes`)
       .then((response) => setRecipes(response.data))
       .catch((err) => console.log(err));
   }, []);
@@ -69,9 +70,9 @@ recipes.filter((recipe) => {
               style={{ cursor: "pointer" }}
             >
               <img
-                      src={`/uploads/${item.image}`}
-                      alt={item.title}
-                    />
+                src={`${API_URL}/uploads/${item.image}`}
+                alt={item.title}
+              />
 
               <div className="recipe-info">
                 <h4>{item.title}</h4>

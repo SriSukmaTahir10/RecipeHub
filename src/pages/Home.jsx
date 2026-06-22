@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import foodFloat from "../assets/images/food-float.png";
 import search from "../assets/images/search.png";
+import { API_URL } from "../config";
 
 function Home() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ console.log(recommendedRecipes);
       try {
         setLoading(true);
 
-        const response = await axios.get("http://localhost:5000/recipes");
+        const response = await axios.get(`${API_URL}/recipes`);
         setRecipes(response.data);
       } catch (err) {
         console.error(err);
@@ -122,7 +123,7 @@ console.log(recommendedRecipes);
           }
           >
         <img
-            src={`http://localhost:5000/uploads/${item.image}`}
+            src={`${API_URL}/uploads/${item.image}`}
             alt={item.title}
         />
 
@@ -147,7 +148,7 @@ console.log(recommendedRecipes);
                     style={{ cursor: "pointer" }}
                   >
                   <img
-                      src={`http://localhost:5000/uploads/${item.image}`}
+                      src={`${API_URL}/uploads/${item.image}`}
                       alt={item.title}
                     />
                     <h4>{item.title}</h4>
@@ -175,7 +176,7 @@ console.log(recommendedRecipes);
                     style={{ cursor: "pointer" }}
                   >
                     <img
-                      src={`http://localhost:5000/uploads/${item.image}`}
+                      src={`${API_URL}/uploads/${item.image}`}
                       alt={item.title}
                     />
                     <h4>{item.title}</h4>

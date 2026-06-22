@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import axios from "axios";
 import "../App.css";
+import { API_URL } from "../config";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,7 +23,7 @@ function Login() {
       if (isLogin) {
         
 
-        const response = await axios.post("http://localhost:5000/auth/login", {
+        const response = await axios.post(`${API_URL}/auth/login`, {
           email,
           password,
         });
@@ -47,7 +48,7 @@ function Login() {
         }
 
         // register ke backend
-        const response = await axios.post("http://localhost:5000/auth/register", {
+        const response = await axios.post(`${API_URL}/auth/register`, {
           name,
           email,
           password,

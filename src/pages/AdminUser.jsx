@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SidebarAdmin from "../components/SidebarAdmin";
+import { API_URL } from "../config";
 
 function AdminUser() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -16,7 +17,7 @@ function AdminUser() {
 
   try {
     await axios.delete(
-      `http://localhost:5000/users/${id}`,
+      `${API_URL}/users/${id}`,
       {
         headers: {
           Authorization: `Bearer ${adminToken}`,
@@ -38,7 +39,7 @@ function AdminUser() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users", {
+      .get(`${API_URL}/users`, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },

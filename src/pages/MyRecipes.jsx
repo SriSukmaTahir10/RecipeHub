@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function MyRecipes() {
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -17,7 +18,7 @@ function MyRecipes() {
     if (!savedUser || !token) return;
 
     axios
-      .get(`http://localhost:5000/favorites/${savedUser._id}`, {
+      .get(`${API_URL}/favorites/${savedUser._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +47,7 @@ function MyRecipes() {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`http://localhost:5000/uploads/${item.recipeData.image}`}
+                src={`${API_URL}/uploads/${item.recipeData.image}`}
                 alt={item.recipeData.title}
               />
 

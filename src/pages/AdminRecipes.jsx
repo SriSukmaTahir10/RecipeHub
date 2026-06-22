@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SidebarAdmin from "../components/SidebarAdmin";
+import { API_URL } from "../config";
 
 function AdminRecipes() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -12,7 +13,7 @@ function AdminRecipes() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/recipes")
+      .get(`${API_URL}/recipes`)
       .then((response) => setRecipes(response.data))
       .catch((err) => console.log(err));
   }, []);
@@ -22,7 +23,7 @@ function AdminRecipes() {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/recipes/${id}`, {
+      await axios.delete(`${API_URL}/recipes/${id}`, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },

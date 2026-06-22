@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SidebarAdmin from "../components/SidebarAdmin";
+import { API_URL } from "../config";
 
 function AdminCategory() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -8,7 +9,7 @@ function AdminCategory() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/recipes")
+      .get(`${API_URL}recipes`)
       .then((response) => {
         const data = response.data;
 

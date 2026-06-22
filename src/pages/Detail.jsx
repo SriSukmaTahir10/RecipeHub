@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function Detail() {
   const { id } = useParams();
@@ -12,12 +13,12 @@ function Detail() {
   // ambil detail resep
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/recipes/${id}`)
+      .get(`${API_URL}/recipes/${id}`)
       .then((response) => setRecipe(response.data))
       .catch((err) => console.log(err));
 
     // tambah jumlah view resep
-    axios.patch(`http://localhost:5000/recipes/${id}/view`).catch((err) => console.log(err));
+    axios.patch(`${API_URL}/recipes/${id}/view`).catch((err) => console.log(err));
   }, [id]);
 
   // simpan ke favorite
@@ -33,7 +34,7 @@ function Detail() {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        "http://localhost:5000/favorites",
+        `${API_URL}/favorites`,
         {
           recipeId: recipe._id,
           recipeData: recipe,
@@ -73,7 +74,7 @@ function Detail() {
             src={
             recipe.image?.startsWith("/images")
             ? recipe.image
-            : `http://localhost:5000/uploads/${recipe.image}`
+            : `${API_URL}/uploads/${recipe.image}`
             }
               alt={recipe.title}
           />
