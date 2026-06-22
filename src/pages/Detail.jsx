@@ -76,36 +76,43 @@ function Detail() {
           />
         </div>
 
-        <div className="detail-right">
-          <h2>{recipe.title}</h2>
-          <p className="rating">⭐ {recipe.rating}</p>
-          <p className="time">⏱ {recipe.time}</p>
+ <div className="detail-right">
+  <h2>{recipe.title}</h2>
 
-          <h4>Bahan-bahan</h4>
-          <ul>
-            {recipe.ingredients?.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+  <p className="rating">
+    ⭐ {recipe.rating}
+  </p>
 
-          <div className="action-buttons">
-            <button className="save-btn" onClick={handleSave}>
-              Simpan Resep
-            </button>
-            <button className="share-btn">Bagikan</button>
-          </div>
-        </div>
-      </div>
+  <p className="time">
+    ⏱ {recipe.time}
+  </p>
 
-      <div className="steps">
-        <h4>Langkah Memasak</h4>
-        <ol>
-          {recipe.steps?.map((step, index) => (
-            <li key={index}>{step}</li>
-          ))}
-        </ol>
-      </div>
-    </div>
+  <h4>Bahan-bahan</h4>
+  <ul>
+    {recipe.ingredients?.map((item,index)=>(
+      <li key={index}>{item}</li>
+    ))}
+  </ul>
+
+  <h4>Langkah Memasak</h4>
+  <ol>
+    {recipe.steps?.map((step,index)=>(
+      <li key={index}>{step}</li>
+    ))}
+  </ol>
+
+  <div className="action-buttons">
+    <button
+      className="save-btn"
+      onClick={handleSave}
+    >
+      Simpan Resep
+    </button>
+
+  </div>
+</div>
+</div>
+</div>
   );
 }
 
