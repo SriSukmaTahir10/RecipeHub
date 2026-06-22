@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import axios from "axios";
 import "../App.css";
 import { API_URL } from "../config";
@@ -76,14 +75,6 @@ function Login() {
         alert("Server tidak terhubung");
       }
     }
-  };
-
-  const handleGoogleLogin = () => {
-    alert("Login dengan Google");
-  };
-
-  const handleFacebookLogin = () => {
-    alert("Login dengan Facebook");
   };
 
   return (
@@ -198,30 +189,6 @@ function Login() {
           {isLogin ? "Login" : "Daftar"}
         </button>
 
-        <div className="auth-social-section">
-          <p className="auth-divider-text">atau masuk dengan</p>
-
-          <div className="social-buttons">
-            <button
-              type="button"
-              className="social-btn google"
-              onClick={handleGoogleLogin}
-              aria-label="Login dengan Google"
-            >
-              <FaGoogle />
-            </button>
-
-            <button
-              type="button"
-              className="social-btn facebook"
-              onClick={handleFacebookLogin}
-              aria-label="Login dengan Facebook"
-            >
-              <FaFacebookF />
-            </button>
-          </div>
-        </div>
-
         <div className="auth-footer">
           <p>
             {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}{" "}
@@ -231,7 +198,7 @@ function Login() {
           </p>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 

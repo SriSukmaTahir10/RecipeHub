@@ -972,47 +972,6 @@
   margin-bottom: 5px;
 }
 
-.auth-social-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 18px;
-}
-
-.auth-divider-text {
-  margin: 0 0 10px;
-  text-align: center;
-  color: #666;
-  font-size: 14px;
-}
-
-.social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-}
-
-.social-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid #ddd;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.social-btn.google {
-  color: #db4437;
-}
-
-.social-btn.facebook {
-  color: #1877f2;
-}
-
 .auth-footer {
   text-align: center;
   margin-top: 16px;
