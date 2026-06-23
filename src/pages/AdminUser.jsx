@@ -93,7 +93,7 @@ function AdminUser() {
           );
 
           window.location.href =
-            "/admin/login";
+            "/";
 
           return;
         }
