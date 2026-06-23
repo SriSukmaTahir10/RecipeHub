@@ -18,7 +18,7 @@ function MyRecipes() {
     if (!savedUser || !token) return;
 
     axios
-      .get(`${API_URL}/favorites/${savedUser._id}`, {
+    .get(`${API_URL}/favorites/${savedUser.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
