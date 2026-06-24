@@ -915,15 +915,6 @@ app.delete(
   }
 );
 
-app.get("/dbtest", async (req, res) => {
-  const recipes = await Recipe.find();
-
-  res.json({
-    total: recipes.length,
-    titles: recipes.map((r) => r.title),
-  });
-});
-
 // RUN SERVER
 const PORT = process.env.PORT || 5000;
 

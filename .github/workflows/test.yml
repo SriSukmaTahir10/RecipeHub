@@ -1,21 +1,33 @@
-name: Regression Test
+name: RecipeHub CI
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  backend-test:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+    defaults:
+      run:
+        working-directory: backend
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - run: |
-          cd backend
-          npm install
+      - name: Install Dependencies
+        run: npm install
 
-      - run: echo "Regression test workflow configured successfully"
+      - name: Run Jest Test
+        run: npm test

@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const request = require("supertest");
 const app = require("../server");
 
+jest.setTimeout(30000);
+
 let userToken;
 let userId;
 let token;
@@ -9,6 +11,8 @@ let createdRecipeId;
 let favoriteId;
 
 beforeAll(async () => {
+  console.log("=== MULAI LOGIN ADMIN ===");
+
   const loginRes = await request(app)
     .post("/admin/login")
     .send({
@@ -16,8 +20,11 @@ beforeAll(async () => {
       password: "123456",
     });
 
+  console.log("STATUS:", loginRes.statusCode);
+  console.log("BODY:", loginRes.body);
+
   token = loginRes.body.token;
-});
+}, 30000);
 
 test("POST /admin/login berhasil", async () => {
   const res = await request(app)
@@ -278,9 +285,7 @@ test("DELETE /recipes/:id", async () => {
   expect(res.statusCode).toBe(200);
 });
 
-afterAll(async () => {
-  await mongoose.connection.close();
-});
+
 
 test("DELETE /recipes/:id tidak ditemukan", async () => {
   const res = await request(app)
@@ -460,4 +465,8 @@ test("DELETE /favorites/:id tidak ditemukan", async () => {
 
   expect(res.statusCode).toBe(404);
 
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
 });
