@@ -17,17 +17,36 @@ jobs:
       run:
         working-directory: backend
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
-      - name: Setup Node.js
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Check Environment
+        run: |
+          echo "=== CHECK ENV ==="
+
+          if [ -z "$MONGODB_URI" ]; then
+            echo "MONGODB_URI KOSONG"
+          else
+            echo "MONGODB_URI ADA"
+          fi
+
+          if [ -z "$JWT_SECRET" ]; then
+            echo "JWT_SECRET KOSONG"
+          else
+            echo "JWT_SECRET ADA"
+          fi
 
       - name: Run Jest Test
         run: npm test
