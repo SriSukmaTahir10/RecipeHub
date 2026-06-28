@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 // backend server utama RecipeHub
 const express = require("express");
 const cors = require("cors");
