@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // backend server utama RecipeHub
 const express = require("express");
 const cors = require("cors");
@@ -45,8 +47,6 @@ const upload = multer({
 });
 
 // secret token
-require("dotenv").config();
-
 const JWT_SECRET =
   process.env.JWT_SECRET;
 
@@ -192,6 +192,11 @@ const authLimiter = rateLimit({
     message: "Terlalu banyak percobaan login. Coba lagi nanti.",
   },
 });
+
+console.log("===== SERVER ENV =====");
+console.log("URI :", process.env.MONGODB_URI ? "ADA" : "KOSONG");
+console.log("JWT :", process.env.JWT_SECRET ? "ADA" : "KOSONG");
+console.log("======================");
 
 // DATABASE
 mongoose
